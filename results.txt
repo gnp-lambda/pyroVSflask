@@ -1,0 +1,47 @@
+
+Resultados de las pruebas.
+
+Pyro server:
+
+```
+# python -m timeit -n 10000 -s 'from pyro_client import main' 'main(1024)'
+10000 loops, best of 3: 3.05 msec per loop
+
+# python -m timeit -n 10000 -s 'from pyro_client import main' 'main(100)'
+10000 loops, best of 3: 1.37 msec per loop
+
+# python -m timeit -n 10000 -s 'from pyro_client import main' 'main(10)'
+10000 loops, best of 3: 1.18 msec per loop
+```
+
+
+Gunicorn sync:
+
+```
+# gunicorn -c gunicorn_sync.conf flask_server:app
+
+# python -m timeit -n 10000 -s 'from flask_client import main' 'main(1024)'
+10000 loops, best of 3: 3.83 msec per loop
+
+# python -m timeit -n 10000 -s 'from flask_client import main' 'main(100)'
+10000 loops, best of 3: 2.69 msec per loop
+
+# python -m timeit -n 10000 -s 'from flask_client import main' 'main(10)'
+10000 loops, best of 3: 2.51 msec per loop
+```
+
+
+Gunicorn gevent:
+
+```
+# gunicorn -c gunicorn_gevent.conf flask_server:app
+
+# python -m timeit -n 10000 -s 'from flask_client import main' 'main(1024)'
+10000 loops, best of 3: 3.71 msec per loop
+
+# python -m timeit -n 10000 -s 'from flask_client import main' 'main(100)'
+10000 loops, best of 3: 2.5 msec per loop
+
+# python -m timeit -n 10000 -s 'from flask_client import main' 'main(10)'
+10000 loops, best of 3: 2.22 msec per loop
+```
