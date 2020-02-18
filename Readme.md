@@ -19,16 +19,12 @@ Se puede variar el tamaño del payload en el argumento a `main`.
 
 ## Flask
 
-Iniciar el server de desarrollo flask con:
+Hay varios archivos de configuración de gunicorn para probar distintas opciones.
+
+Iniciar el servicio con gunicorn:
 
 ```
-python flask_server.py
-```
-
-O iniciar el servicio con gunicorn:
-
-```
-gunicorn -c gunicorn.conf flask_server:app
+gunicorn -c gunicorn_<type>.conf flask_server:app
 ```
 
 Ejecutar el cliente con timeit:
@@ -36,5 +32,3 @@ Ejecutar el cliente con timeit:
 ```
 python -m timeit -n 10000 -s 'from flask_client import main' 'main(1024)'
 ```
-
-
