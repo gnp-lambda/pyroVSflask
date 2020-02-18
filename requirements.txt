@@ -1,0 +1,4 @@
+Flask
+gunicorn[gevent]
+Pyro==3.9.1
+requests
