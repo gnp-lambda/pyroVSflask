@@ -1,0 +1,50 @@
+version: '3'
+services:
+  server_pyro:
+    image: fierroserver:1.37.2
+    environment:
+      DB_NAME: "${DB_NAME:?err}"
+    volumes:
+      - /var/run/postgresql:/var/run/postgresql
+  server_http:
+    image: fierroserver:1.37.2
+    environment:
+      DB_NAME: "${DB_NAME:?err}"
+    command:
+      - /entrypoint-http.sh
+    volumes:
+      - /var/run/postgresql:/var/run/postgresql
+  client_pyro:
+    image: fierrocli:1.37.2
+    depends_on:
+      - server_pyro
+    command:
+      - '-f'
+      - 'PYROLOC://server_pyro:8011'
+      - '-u'
+      - '${USER:?err}'
+      - '-p'
+      - '${PASSWORD:?err}'
+      - '-s'
+      - 'SUC1'
+      - '/pyro_vs_http/fierro.py'
+      - '4'
+    volumes:
+      - .:/pyro_vs_http
+  client_http:
+    image: fierrocli:1.37.2
+    depends_on:
+      - server_http
+    command:
+      - '-f'
+      - 'http://server_http:8000'
+      - '-u'
+      - '${USER:?err}'
+      - '-p'
+      - '${PASSWORD:?err}'
+      - '-s'
+      - 'SUC1'
+      - '/pyro_vs_http/fierro.py'
+      - '4'
+    volumes:
+      - .:/pyro_vs_http
