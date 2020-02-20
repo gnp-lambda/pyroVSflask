@@ -14,4 +14,4 @@ if __name__ == '__main__':
     timers = timeit.repeat(stmt='ClientManager.findByPrimaryKey(%s)' % extraArgs[0],
                            setup='from colofon.client.model.managers import ClientManager',
                            repeat=REPEAT, number=NUMBER)
-    print("%s loops, best of 3: %s sec per loop" % (NUMBER, min(timers)))
+    print("%s loops, best of 3: %.4f msec per loop" % (NUMBER, min(timers) / NUMBER * 1000))

@@ -60,8 +60,8 @@ aa89b66de327        pyro_vs_http_server_pyro_1    0.01%               7.145MiB /
 # Pruebas fierro
 
 ```
-client_pyro_1  | 1000 loops, best of 3: 9.06861615181 sec per loop
-client_http_1  | 1000 loops, best of 3: 13.4274890423 sec per loop
+client_http_1  | 1000 loops, best of 3: 12.7740 msec per loop
+client_pyro_1  | 1000 loops, best of 3: 8.0504 msec per loop
 ```
 
 
@@ -69,6 +69,6 @@ Uso de recursos:
 
 ```
 CONTAINER ID        NAME                     CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
-9373b8a5d896        pyro_vs_http_server_pyro_1   0.03%               87.91MiB / 7.691GiB   1.12%               617kB / 2.87MB      623kB / 16.4kB      6
-779e114f6fb1        pyro_vs_http_server_http_1   0.06%               167.6MiB / 7.691GiB   2.13%               1.25MB / 3.7MB      32.8kB / 8.19kB     3
+6763212047ed        pyro_vs_http_server_http_1   0.09%               168.9MiB / 7.691GiB   2.14%               1.25MB / 3.7MB      229kB / 8.19kB      3
+fa705bdf58db        pyro_vs_http_server_pyro_1   0.02%               88.07MiB / 7.691GiB   1.12%               615kB / 2.87MB      696kB / 16.4kB      6
 ```
