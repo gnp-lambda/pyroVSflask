@@ -1,0 +1,47 @@
+version: '3'
+services:
+  server_pyro:
+    image: pyro_vs_http
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint:
+      - python
+      - /app/pyro_server.py
+  client_pyro:
+    image: pyro_vs_http
+    depends_on:
+      - server_pyro
+    environment:
+      SERVER: "PYROLOC://server_pyro:8011/root"
+    entrypoint:
+      - 'python'
+      - '-m'
+      - 'timeit'
+      - '-n'
+      - '1000'
+      - '-s'
+      - 'from pyro_client import main' 
+      - 'main(1024)'
+  server_flask:
+    image: pyro_vs_http
+    entrypoint:
+      - gunicorn
+      - -c
+      - /app/gunicorn_gevent.conf
+      - flask_server:app
+  client_flask:
+    image: pyro_vs_http
+    depends_on:
+      - server_flask
+    environment:
+      SERVER: "http://server_flask:8000"
+    entrypoint:
+      - 'python'
+      - '-m'
+      - 'timeit'
+      - '-n'
+      - '1000'
+      - '-s'
+      - 'from flask_client import main' 
+      - 'main(1024)'

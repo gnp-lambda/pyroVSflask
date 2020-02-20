@@ -45,3 +45,13 @@ Gunicorn gevent:
 # python -m timeit -n 10000 -s 'from flask_client import main' 'main(10)'
 10000 loops, best of 3: 2.22 msec per loop
 ```
+
+
+Transferencia de red de cada server y otros recursos de cada server:
+
+```
+CONTAINER ID        NAME                     CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+fa2a077f4557        pyro_vs_http_server_flask_1   0.12%               33.89MiB / 7.691GiB   0.43%               4.29MB / 4.11MB     0B / 0B             2
+aa89b66de327        pyro_vs_http_server_pyro_1    0.01%               7.145MiB / 7.691GiB   0.09%               5.36MB / 4.87MB     0B / 0B             1
+```
+

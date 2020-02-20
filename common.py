@@ -5,4 +5,4 @@ import random
 
 
 def generate_payload(size):
-    return ''.join(random.choice(string.ascii_letters) for _ in range(size))
+    return 'X' * size

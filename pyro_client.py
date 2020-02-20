@@ -1,10 +1,12 @@
 
 from __future__ import unicode_literals, print_function, absolute_import
 
-# import requests
+import os
 import Pyro.core
 
 from common import generate_payload
+
+SERVER = os.environ.get('SERVER', 'PYROLOC://localhost:8011/root')
 
 
 def get_pyro_server(uri):
@@ -17,7 +19,7 @@ def get_pyro_value(server, size, payload_size=1024):
 
 
 def main(size):
-    server = get_pyro_server('PYROLOC://localhost:8011/root')
+    server = get_pyro_server(SERVER)
     return get_pyro_value(server, size, size)
 
 
