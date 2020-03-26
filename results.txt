@@ -1,49 +1,33 @@
 
 # Pyro vs Flask
 
+Pruebas hechas con `docker-compose up -d pyro_server && docker-compose up pyro_client` y lo mismo para flask
+
 Pyro server:
 
 ```
-# python -m timeit -n 10000 -s 'from pyro_client import main' 'main(1024)'
-10000 loops, best of 3: 3.05 msec per loop
-
-# python -m timeit -n 10000 -s 'from pyro_client import main' 'main(100)'
-10000 loops, best of 3: 1.37 msec per loop
-
-# python -m timeit -n 10000 -s 'from pyro_client import main' 'main(10)'
-10000 loops, best of 3: 1.18 msec per loop
-```
-
-
-Gunicorn sync:
-
-```
-# gunicorn -c gunicorn_sync.conf flask_server:app
-
-# python -m timeit -n 10000 -s 'from flask_client import main' 'main(1024)'
-10000 loops, best of 3: 3.83 msec per loop
-
-# python -m timeit -n 10000 -s 'from flask_client import main' 'main(100)'
-10000 loops, best of 3: 2.69 msec per loop
-
-# python -m timeit -n 10000 -s 'from flask_client import main' 'main(10)'
-10000 loops, best of 3: 2.51 msec per loop
++ python -m timeit -n 1000 -s from pyro_client import main main(10)
+1000 loops, best of 3: 1.81 msec per loop
++ python -m timeit -n 1000 -s from pyro_client import main main(100)
+1000 loops, best of 3: 1.82 msec per loop
++ python -m timeit -n 1000 -s from pyro_client import main main(1000)
+1000 loops, best of 3: 1.88 msec per loop
++ python -m timeit -n 1000 -s from pyro_client import main main(10000)
+1000 loops, best of 3: 2.06 msec per loop
 ```
 
 
 Gunicorn gevent:
 
 ```
-# gunicorn -c gunicorn_gevent.conf flask_server:app
-
-# python -m timeit -n 10000 -s 'from flask_client import main' 'main(1024)'
-10000 loops, best of 3: 3.71 msec per loop
-
-# python -m timeit -n 10000 -s 'from flask_client import main' 'main(100)'
-10000 loops, best of 3: 2.5 msec per loop
-
-# python -m timeit -n 10000 -s 'from flask_client import main' 'main(10)'
-10000 loops, best of 3: 2.22 msec per loop
++ python -m timeit -n 1000 -s from flask_client import main main(10)
+1000 loops, best of 3: 2.85 msec per loop
++ python -m timeit -n 1000 -s from flask_client import main main(100)
+1000 loops, best of 3: 2.79 msec per loop
++ python -m timeit -n 1000 -s from flask_client import main main(1000)
+1000 loops, best of 3: 2.79 msec per loop
++ python -m timeit -n 1000 -s from flask_client import main main(10000)
+1000 loops, best of 3: 3.07 msec per loop
 ```
 
 
@@ -51,8 +35,8 @@ Transferencia de red de cada server y otros recursos de cada server (prueba con 
 
 ```
 CONTAINER ID        NAME                     CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
-fa2a077f4557        pyro_vs_http_server_flask_1   0.12%               33.89MiB / 7.691GiB   0.43%               4.29MB / 4.11MB     0B / 0B             2
-aa89b66de327        pyro_vs_http_server_pyro_1    0.01%               7.145MiB / 7.691GiB   0.09%               5.36MB / 4.87MB     0B / 0B             1
+baaec92756d7        pyro_vs_http_server_flask_1   0.03%               37.04MiB / 7.691GiB   0.47%               38.2MB / 37.5MB     25.8MB / 0B         2
+e8d91cdda507        pyro_vs_http_server_pyro_1   0.00%               7.348MiB / 7.691GiB   0.09%               43MB / 41.1MB       0B / 0B             1
 ```
 
 

@@ -15,14 +15,12 @@ services:
     environment:
       SERVER: "PYROLOC://server_pyro:8011/root"
     entrypoint:
-      - 'python'
-      - '-m'
-      - 'timeit'
-      - '-n'
+      - '/app/entrypoint.sh'
+      - 'pyro' 
+      - '10'
+      - '100'
       - '1000'
-      - '-s'
-      - 'from pyro_client import main' 
-      - 'main(1024)'
+      - '10000'
   server_flask:
     image: pyro_vs_http
     entrypoint:
@@ -37,11 +35,9 @@ services:
     environment:
       SERVER: "http://server_flask:8000"
     entrypoint:
-      - 'python'
-      - '-m'
-      - 'timeit'
-      - '-n'
+      - '/app/entrypoint.sh'
+      - 'flask' 
+      - '10'
+      - '100'
       - '1000'
-      - '-s'
-      - 'from flask_client import main' 
-      - 'main(1024)'
+      - '10000'
