@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package get_value;
+
+service Main {
+  rpc GetValue (ValueRequest) returns (ValueReply) {};
+}
+
+message ValueRequest {
+  string value = 1;
+  int32  size  = 2;
+}
+
+message ValueReply {
+  string value = 1;
+}
+

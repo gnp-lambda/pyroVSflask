@@ -40,6 +40,19 @@ e8d91cdda507        pyro_vs_http_server_pyro_1   0.00%               7.348MiB / 
 ```
 
 
+# Pruebas grpc
+
+```
++ cd grpc
++ python -m timeit -n 1000 -s 'from grps_client import main' 'main(10)'
+1000 loops, best of 3: 1.7 msec per loop
++ python -m timeit -n 1000 -s 'from grps_client import main' 'main(100)'
+1000 loops, best of 3: 1.68 msec per loop
++ python -m timeit -n 1000 -s 'from grps_client import main' 'main(1000)'
+1000 loops, best of 3: 1.69 msec per loop
++ python -m timeit -n 1000 -s 'from grps_client import main' 'main(10000)'
+1000 loops, best of 3: 1.82 msec per loop
+```
 
 # Pruebas fierro
 
